@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Book Information</h2>
+<p id="title"></p>
+<p id="author"></p>
+<p id="genres1"></p>
+<p id="genres2"></p>
+
+<script>
+fetch("books.json")
+  .then(response => {
+    if (!response.ok) throw new Error("Failed");
+    return response.json();
+  })
+  .then(data => {
+    let book1 = data.books[0];
+    let book2 = data.books[1];
+
+    document.getElementById("title").textContent = book1.title;
+    document.getElementById("author").textContent = book2.author;
+    document.getElementById("genres1").textContent =
+      book1.title + " — " + book1.genres.join(", ");
+    document.getElementById("genres2").textContent =
+      book2.title + " — " + book2.genres.join(", ");
+  })
+  .catch(() => {
+    document.getElementById("title").textContent =
+      "Unable to load book information.";
+  });
+</script>
+
+</body>
+</html>
